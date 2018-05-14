@@ -1,0 +1,132 @@
+\documentclass{beamer}
+
+\usetheme{Luebeck}%boxes, Luebeck, Darmstadt
+
+\usepackage{amssymb}%
+\usepackage[mathscr]{eucal}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{psfrag}
+\usepackage{xypic}
+\usepackage{url}
+%\usepackage{xymatrix}
+\setbeamercovered{dynamic}
+\newcommand{\gen}{\mathscr{L}}
+\newcommand{\filty}{\mathscr{Y}}
+
+\usepackage[mathscr]{eucal}
+\usepackage{times}
+\usefonttheme{structurebold}
+%
+\usepackage[english]{babel}
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\usepackage{amsmath,amssymb}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+%\geometry{landscape}
+
+
+\DeclareGraphicsExtensions{.pdf, .jpg,.png,.jpeg}
+\graphicspath{{images/}}
+\theoremstyle{plain}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\lb}{\left\{}
+\newcommand{\rb}{\right\}}
+\newcommand{\Borel}{\mathscr{B}}
+\newcommand{\Top}{\mathscr{T}}
+
+\newcommand{\Err}{\mathscr{E}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vtheta}{\vartheta}
+\newcommand{\vkap}{\varkappa}
+
+\newcommand{\BP}{\mathbb{P}}
+\newcommand{\BE}{\mathbb{E}}
+\newcommand{\KK}{K}
+
+\newcommand{\Def}{\overset{\text{def}}{=}}
+
+
+\newcommand{\Sone}{\mathfrak{S}^1}
+\newcommand{\Cyl}{\mathfrak{C}}
+\newcommand{\filt}{\mathscr{F}}
+\newcommand{\gilt}{\mathscr{G}}
+\newcommand{\wilt}{\mathscr{W}}
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+
+
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\EGY}{\Delta}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\bOne}{\mathbf{1}}
+\newcommand{\der}{d}
+\newcommand{\Gaussian}{\mathcal{G}}
+\newcommand{\sa}{\mathscr{S}}
+\newcommand{\TimeSet}{\mathcal{T}}
+
+
+
+\title[]{Heavy Tails}
+\author{Richard Sowers}
+\institute[Illinois]{
+  University of Illinois at Urbana-Champaign}
+%\date{Fall 2018}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\begin{center}
+\includegraphics[width = 0.5\textwidth]{logo}
+\end{center}
+\end{frame}
+
+\begin{frame}
+We can \emph{invert} cumulatives;
+\begin{equation*} F^{-1}(\alpha) \Def \inf\lb x\in \R:\ F(x)>\alpha\rb \end{equation*}
+
+Let's now look at a \emph{QQ Plot}
+\begin{center}\url{https://en.wikipedia.org/wiki/Q-Q_plot}\end{center}
+Assume that we have two cumulatives $F_1$ and $F_2$, which are integrals of two positive density functions;
+\begin{equation*} F_i(t)\Def \int_{s=-\infty}^t f_i(s)ds. \qquad i\in \{1,2\}, t\in \R \end{equation*}
+Let's plot $(F_1^{-1}(\alpha),F_2^{-1}(\alpha))$ for $\alpha\in (0,1)$; 
+this is a \emph{parametric plot}.
+\end{frame}
+
+\begin{frame}
+Suppose that this plot is a line;
+\begin{equation} \label{E:QQLine} F_2^{-1}(\alpha) = m F_1^{-1}(\alpha)+b \qquad \alpha\in (0,1) \end{equation}
+Recalling how to take derivatives of inverse functions, we then have that
+\begin{equation*} \frac{1}{f_2(F_2^{-1}(\alpha))} = \frac{m}{f_1(F_1^{-1}(\alpha))} \qquad \alpha\in (0,1) \end{equation*}
+or rather, using \eqref{E:QQLine},
+\begin{equation*} \frac{1}{f_2(m F_1^{-1}(\alpha)+b)} = \frac{m}{f_1(F_1^{-1}(\alpha))}\end{equation*}
+which implies (you might take $x'=F_1^{-1}(\alpha)$) that 
+\begin{equation*} f_1(x')=mf_2(mx'+b). \qquad x'\in \R\end{equation*}
+If $X_1$ and $X_2$ are random variables with cumulatives, respectively, $F_1$ and $F_2$, this in turn implies that, in law, 
+\begin{equation*}X_2=mX_1+b.\end{equation*}
+\end{frame}
+
+\begin{frame}
+One often plots a reference line through the points corresponding to $\alpha=\tfrac14$ and $\alpha=\tfrac34$.
+\end{frame}
+
+\begin{frame}
+Let's see what could happen with a \emph{heavy-tailed} distribution.
+
+Assume that at the center of the QQ plot, $F_2^{-2}(\alpha)\approx F_1^{-1}(\alpha)$, so that near the center of the distribution $F_1$ and $F_2$ agree with each other.  Let's assume, however, that $F_2^{-1}(\alpha)\ll F_1^{-1}(\alpha)$ when $\alpha \approx 0$.  Setting
+\begin{equation*} x_i\Def F_i^{-1}(\alpha) \end{equation*}
+for $i\in \{1,2\}$, the inequality $x_2\ll x_1$ means that $F_2$ accumulates mass $\alpha$ further to the left than $F_1$.  The left tail of $F_2$ is thus \emph{fatter} than the left tail of $F_1$.
+
+Similarly, let's assume that $F_2^{-1}(\alpha)\gg F_1^{-1}(\alpha)$ for $\alpha \approx 1$.
+Again using \eqref{E:simple}, the inequality $x_2\gg x_1$ means that $F_2$ accumulates mass $\alpha$ further to the right than $F_1$, meaning that $F_2$ accumulates mass in the right tail at a more extreme value than $F_1$; the right tail of $F_2$ is thus \emph{fatter} than the right- tail of $F_1$.
+\end{frame}
+\end{document}
+
+
+
+
